@@ -28,10 +28,12 @@ import {
   ApiBasicAuth,
 } from '@nestjs/swagger';
 import { BasicAuthGuard } from '../../guards/basic/basic-auth.guard';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @ApiTags('users')
 @ApiBasicAuth()
 @UseGuards(BasicAuthGuard)
+@SkipThrottle()
 @Controller('users')
 export class UsersController {
   constructor(
