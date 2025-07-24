@@ -18,9 +18,13 @@ export function mapDomainCodeToHttpStatus(code: DomainExceptionCode): number {
     case DomainExceptionCode.InternalServerError:
       return HttpStatus.INTERNAL_SERVER_ERROR;
     case DomainExceptionCode.AlreadyExists:
-      return HttpStatus.CONFLICT;
+      return HttpStatus.BAD_REQUEST;
     case DomainExceptionCode.AlreadyDeleted:
-      return HttpStatus.GONE;
+      return HttpStatus.BAD_REQUEST;
+    case DomainExceptionCode.AlreadyConfirmed:
+      return HttpStatus.BAD_REQUEST;
+    case DomainExceptionCode.ConfirmationCodeInvalid:
+      return HttpStatus.BAD_REQUEST;
     case DomainExceptionCode.TooManyRequests:
       return HttpStatus.TOO_MANY_REQUESTS;
     default:

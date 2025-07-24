@@ -10,8 +10,10 @@ export enum DomainExceptionCode {
   //auth
   Unauthorized = 11,
   EmailNotConfirmed = 12,
-  ConfirmationCodeExpired = 13,
-  PasswordRecoveryCodeExpired = 14,
-  TooManyRequests = 15,
+  AlreadyConfirmed = 13,
+  ConfirmationCodeInvalid = 14,
+  ConfirmationCodeExpired = 15,
+  PasswordRecoveryCodeExpired = 16,
+  TooManyRequests = 17,
   //...
 }

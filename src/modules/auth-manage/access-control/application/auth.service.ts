@@ -134,8 +134,12 @@ export class AuthService {
     const user = await this.usersRepository.findByConfirmationCode({
       confirmationCode: dto.code,
     });
-    if (!user?.emailConfirmation || !this.isCodeValid(user.emailConfirmation))
-      return;
+    if (!user?.emailConfirmation || !this.isCodeValid(user.emailConfirmation)) {
+      throw new DomainException({
+        code: DomainExceptionCode.ConfirmationCodeInvalid,
+        message: 'Confirmation code is not valid',
+      });
+    }
     user.isEmailConfirmed = true;
     user.emailConfirmation.isConfirmed = true;
     await this.usersRepository.save(user);
@@ -146,7 +150,12 @@ export class AuthService {
     dto: RegistrationEmailResendingInputDto,
   ): Promise<void> {
     const user = await this.usersRepository.findByEmail({ email: dto.email });
-    if (!user || user.isEmailConfirmed) return;
+    if (!user || user.isEmailConfirmed) {
+      throw new DomainException({
+        code: DomainExceptionCode.AlreadyConfirmed,
+        message: 'Email already confirmed',
+      });
+    }
     const expiration = this.getExpiration('EMAIL_CONFIRMATION_EXPIRATION');
     user.resetEmailConfirmation(expiration);
     await this.usersRepository.save(user);
