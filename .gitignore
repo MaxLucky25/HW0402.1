@@ -1,0 +1,15 @@
+
+/dist
+/node_modules
+/build
+/test
+/.idea
+
+
+
+# dotenv environment variable files
+.env.production
+.env.development
+.env.testing
+
+
