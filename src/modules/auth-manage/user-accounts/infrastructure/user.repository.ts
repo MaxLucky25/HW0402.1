@@ -8,7 +8,6 @@ import {
   FindByConfirmationCodeDto,
   FindByEmailDto,
   FindByIdDto,
-  FindByLoginDto,
   FindByLoginOrEmailDto,
   FindByRecoveryDto,
 } from './dto/repoDto';
@@ -34,10 +33,6 @@ export class UsersRepository {
     return user;
   }
 
-  async findByLogin(dto: FindByLoginDto): Promise<UserDocument | null> {
-    return this.UserModel.findOne({ login: dto.login, deletedAt: null });
-  }
-
   async findByEmail(dto: FindByEmailDto): Promise<UserDocument | null> {
     return this.UserModel.findOne({ email: dto.email, deletedAt: null });
   }
@@ -45,10 +40,10 @@ export class UsersRepository {
   async findByLoginOrEmail(
     dto: FindByLoginOrEmailDto,
   ): Promise<UserDocument | null> {
-    const user = await this.findByLogin({ login: dto.loginOrEmail });
-    if (user) return user;
-
-    return this.findByEmail({ email: dto.loginOrEmail });
+    return this.UserModel.findOne({
+      $or: [{ login: dto.loginOrEmail }, { email: dto.loginOrEmail }],
+      deletedAt: null,
+    });
   }
 
   async findByRecoveryCode(

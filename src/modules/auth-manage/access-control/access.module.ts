@@ -8,7 +8,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalStrategy } from '../guards/local/local.strategy';
 import { JwtStrategy } from '../guards/bearer/jwt.strategy';
 import { HelpingApplicationModule } from './application/helping-application/helping-application.module';
-// import { HelpingApplicationModule } from 'src/modules/auth-manage/access-control/application/helping-application/helping-application.module';
 
 @Module({
   imports: [

@@ -7,8 +7,6 @@ import { UsersQueryRepository } from './infrastructure/query/users.query-reposit
 import { UsersRepository } from './infrastructure/user.repository';
 import { HelpingApplicationModule } from '../access-control/application/helping-application/helping-application.module';
 import { UserFactory } from './application/user.factory';
-// import { HelpingApplicationModule } from 'src/modules/auth-manage/access-control/application/helping-application/helping-application.module';
-// import { UserFactory } from 'src/modules/auth-manage/user-accounts/application/user.factory';
 
 @Module({
   imports: [

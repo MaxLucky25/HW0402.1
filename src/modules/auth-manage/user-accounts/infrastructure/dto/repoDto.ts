@@ -2,10 +2,6 @@ export class FindByIdDto {
   id: string;
 }
 
-export class FindByLoginDto {
-  login: string;
-}
-
 export class FindByEmailDto {
   email: string;
 }

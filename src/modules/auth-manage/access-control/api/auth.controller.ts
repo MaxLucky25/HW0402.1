@@ -27,7 +27,6 @@ import { NewPasswordInputDto } from './input-dto/new-password.input.dto';
 import { RegistrationConfirmationInputDto } from './input-dto/registration-confirmation.input.dto';
 import { RegistrationEmailResendingInputDto } from './input-dto/registration-email-resending.input.dto';
 import { LoginInputDto } from './input-dto/login.input.dto';
-// import { LoginInputDto } from 'src/modules/auth-manage/access-control/api/input-dto/login.input.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -38,6 +37,7 @@ export class AuthController {
   ) {}
 
   @Post('registration')
+  @HttpCode(204)
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'User registered successfully' })
   @ApiResponse({ status: 400, description: 'Bad request' })

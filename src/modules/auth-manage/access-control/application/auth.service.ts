@@ -14,8 +14,6 @@ import { RegistrationEmailResendingInputDto } from '../api/input-dto/registratio
 import { CreateUserInputDto } from '../../user-accounts/api/input-dto/users.input-dto';
 import { UserFactory } from '../../user-accounts/application/user.factory';
 import { LoginInputDto } from '../api/input-dto/login.input.dto';
-// import { UserFactory } from 'src/modules/auth-manage/user-accounts/application/user.factory';
-// import { LoginInputDto } from 'src/modules/auth-manage/access-control/api/input-dto/login.input.dto';
 
 @Injectable()
 export class AuthService {

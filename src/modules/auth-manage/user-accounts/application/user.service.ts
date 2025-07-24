@@ -5,7 +5,6 @@ import { UserViewDto } from '../api/view-dto/users.view-dto';
 import { FindByIdDto } from '../infrastructure/dto/repoDto';
 import { CreateUserInputDto } from '../api/input-dto/users.input-dto';
 import { UserFactory } from './user.factory';
-// import { UserFactory } from 'src/modules/auth-manage/user-accounts/application/user.factory';
 
 @Injectable()
 export class UsersService {
