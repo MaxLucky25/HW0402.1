@@ -9,6 +9,7 @@ import {
   FindByEmailDto,
   FindByIdDto,
   FindByLoginDto,
+  FindByLoginOrEmailDto,
   FindByRecoveryDto,
 } from './dto/repoDto';
 
@@ -39,6 +40,15 @@ export class UsersRepository {
 
   async findByEmail(dto: FindByEmailDto): Promise<UserDocument | null> {
     return this.UserModel.findOne({ email: dto.email, deletedAt: null });
+  }
+
+  async findByLoginOrEmail(
+    dto: FindByLoginOrEmailDto,
+  ): Promise<UserDocument | null> {
+    const user = await this.findByLogin({ login: dto.loginOrEmail });
+    if (user) return user;
+
+    return this.findByEmail({ email: dto.loginOrEmail });
   }
 
   async findByRecoveryCode(

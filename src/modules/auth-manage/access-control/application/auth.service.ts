@@ -50,7 +50,9 @@ export class AuthService {
   /////////
 
   async validateUser(dto: LoginInputDto): Promise<UserContextDto> {
-    const user = await this.usersRepository.findByLogin({ login: dto.login });
+    const user = await this.usersRepository.findByLoginOrEmail({
+      loginOrEmail: dto.loginOrEmail,
+    });
     if (!user) {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,

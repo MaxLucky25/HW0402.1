@@ -9,11 +9,11 @@ import { UserContextDto } from '../dto/user-context.dto';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super({ usernameField: 'login' });
+    super({ usernameField: 'loginOrEmail' });
   }
   async validate(username: string, password: string): Promise<UserContextDto> {
     const user = await this.authService.validateUser({
-      login: username,
+      loginOrEmail: username,
       password,
     });
     if (!user) {

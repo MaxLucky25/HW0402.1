@@ -1,9 +1,15 @@
 import { IsStringWithTrim } from '../../../../../core/decorators/validation/is-string-with-trim';
-import { loginConstraints, passwordConstraints } from './auth-constraints';
+import {
+  loginOrEmailConstraints,
+  passwordConstraints,
+} from './auth-constraints';
 
 export class LoginInputDto {
-  @IsStringWithTrim(loginConstraints.minLength, loginConstraints.maxLength)
-  login: string;
+  @IsStringWithTrim(
+    loginOrEmailConstraints.minLength,
+    loginOrEmailConstraints.maxLength,
+  )
+  loginOrEmail: string;
 
   @IsStringWithTrim(
     passwordConstraints.minLength,

@@ -8,6 +8,11 @@ export const loginConstraints = {
   maxLength: 20,
 };
 
+export const loginOrEmailConstraints = {
+  minLength: 6,
+  maxLength: 40,
+};
+
 export const confirmationCodeConstrains = {
   minLength: 6,
   maxLength: 20,
