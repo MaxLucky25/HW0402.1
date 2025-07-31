@@ -20,6 +20,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'Invalid username or password',
+        field: 'username',
       });
     }
 

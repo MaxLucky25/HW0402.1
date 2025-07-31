@@ -22,6 +22,7 @@ export class PostRepository {
       throw new DomainException({
         code: DomainExceptionCode.NotFound,
         message: 'Post not found',
+        field: 'Post',
       });
     }
 

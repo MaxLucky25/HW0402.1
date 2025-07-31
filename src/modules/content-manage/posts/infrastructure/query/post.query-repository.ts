@@ -24,6 +24,7 @@ export class PostQueryRepository {
       throw new DomainException({
         code: DomainExceptionCode.NotFound,
         message: 'Post not found',
+        field: 'Post',
       });
     }
     return PostViewDto.mapToView(post);

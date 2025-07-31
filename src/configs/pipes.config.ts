@@ -58,6 +58,7 @@ export function pipesSetup(app: INestApplication) {
         throw new DomainException({
           code: DomainExceptionCode.ValidationError,
           message: 'Validation failed',
+          field: 'validationError',
           extensions: formattedErrors,
         });
       },

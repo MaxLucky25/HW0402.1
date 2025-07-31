@@ -10,6 +10,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'Unauthorized',
+        field: 'Login or Email',
       });
     }
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return

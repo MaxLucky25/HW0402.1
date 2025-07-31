@@ -17,6 +17,7 @@ export class BlogsService {
       throw new DomainException({
         code: DomainExceptionCode.AlreadyExists,
         message: 'Blog with this name already exists',
+        field: 'Name',
       });
     }
     const blog = await this.blogRepository.createBlog(dto);

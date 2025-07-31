@@ -14,6 +14,7 @@ export const ExtractUserFromRequest = createParamDecorator(
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'User is not authorized',
+        field: 'User',
       });
     }
 

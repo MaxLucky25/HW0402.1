@@ -16,6 +16,7 @@ export class BasicAuthGuard implements CanActivate {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'Missing or invalid Authorization header',
+        field: 'Headers',
       });
     }
 
@@ -32,6 +33,7 @@ export class BasicAuthGuard implements CanActivate {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'Invalid credentials',
+        field: 'Login or Password',
       });
     }
 

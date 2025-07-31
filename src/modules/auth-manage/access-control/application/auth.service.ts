@@ -32,6 +32,7 @@ export class AuthService {
       throw new DomainException({
         code: DomainExceptionCode.InternalServerError,
         message: `Config value for ${key} is not set`,
+        field: 'ConfigValue',
       });
     }
     return value;
@@ -55,6 +56,7 @@ export class AuthService {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'Invalid credentials',
+        field: 'loginOrEmail',
       });
     }
 
@@ -67,6 +69,7 @@ export class AuthService {
       throw new DomainException({
         code: DomainExceptionCode.Unauthorized,
         message: 'Invalid credentials',
+        field: 'Password',
       });
     }
 
@@ -90,6 +93,7 @@ export class AuthService {
       throw new DomainException({
         code: DomainExceptionCode.EmailNotConfirmed,
         message: 'emailConfirmation is not set',
+        field: 'email',
       });
     }
     this.emailService
@@ -134,12 +138,34 @@ export class AuthService {
     const user = await this.usersRepository.findByConfirmationCode({
       confirmationCode: dto.code,
     });
-    if (!user?.emailConfirmation || !this.isCodeValid(user.emailConfirmation)) {
+
+    // Проверяем, что пользователь и emailConfirmation существуют
+    if (!user?.emailConfirmation) {
       throw new DomainException({
         code: DomainExceptionCode.ConfirmationCodeInvalid,
         message: 'Confirmation code is not valid',
+        field: 'code',
       });
     }
+
+    // Проверяем, что код уже подтвержден
+    if (user.emailConfirmation.isConfirmed) {
+      throw new DomainException({
+        code: DomainExceptionCode.ConfirmationCodeInvalid,
+        message: 'Confirmation code is not valid',
+        field: 'code',
+      });
+    }
+
+    // Проверяем, что код не истек
+    if (user.emailConfirmation.expirationDate <= new Date()) {
+      throw new DomainException({
+        code: DomainExceptionCode.ConfirmationCodeInvalid,
+        message: 'Confirmation code is not valid',
+        field: 'code',
+      });
+    }
+
     user.isEmailConfirmed = true;
     user.emailConfirmation.isConfirmed = true;
     await this.usersRepository.save(user);
@@ -154,6 +180,7 @@ export class AuthService {
       throw new DomainException({
         code: DomainExceptionCode.AlreadyConfirmed,
         message: 'Email already confirmed',
+        field: 'email',
       });
     }
     const expiration = this.getExpiration('EMAIL_CONFIRMATION_EXPIRATION');

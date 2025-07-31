@@ -27,6 +27,7 @@ export class UsersRepository {
       throw new DomainException({
         code: DomainExceptionCode.NotFound,
         message: 'User not found!',
+        field: 'User',
       });
     }
 

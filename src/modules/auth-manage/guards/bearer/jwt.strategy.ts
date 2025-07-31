@@ -14,6 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       throw new DomainException({
         code: DomainExceptionCode.InternalServerError,
         message: 'JWT_SECRET is not set in environment variables',
+        field: 'Secret',
       });
     }
     super({

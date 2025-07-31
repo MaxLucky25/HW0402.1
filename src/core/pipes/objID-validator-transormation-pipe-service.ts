@@ -15,6 +15,7 @@ export class ObjectIdValidationTransformationPipe implements PipeTransform {
       throw new DomainException({
         code: DomainExceptionCode.BadRequest,
         message: `Invalid ObjectId: ${value}`,
+        field: 'ObjectId',
       });
     }
     return new Types.ObjectId(value); // Преобразуем строку в ObjectId
@@ -36,6 +37,7 @@ export class ObjectIdValidationPipe implements PipeTransform {
       throw new DomainException({
         code: DomainExceptionCode.BadRequest,
         message: `Invalid ObjectId: ${value}`,
+        field: 'ObjectId',
       });
     }
 

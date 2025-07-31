@@ -24,6 +24,7 @@ export class BlogQueryRepository {
       throw new DomainException({
         code: DomainExceptionCode.NotFound,
         message: 'blog not found',
+        field: 'blog',
       });
     }
 
