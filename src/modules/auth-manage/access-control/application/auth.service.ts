@@ -148,6 +148,15 @@ export class AuthService {
       });
     }
 
+    // Проверяем, что пользователь уже подтвержден
+    if (user.isEmailConfirmed) {
+      throw new DomainException({
+        code: DomainExceptionCode.ConfirmationCodeInvalid,
+        message: 'Confirmation code is not valid',
+        field: 'code',
+      });
+    }
+
     // Проверяем, что код уже подтвержден
     if (user.emailConfirmation.isConfirmed) {
       throw new DomainException({
